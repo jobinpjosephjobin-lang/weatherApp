@@ -1,61 +1,97 @@
-/* ===== Base layout ===== */
+/* ===============================
+   GLOBAL STYLES
+================================ */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(180deg, #e8f1f8, #f7f9fb);
+    margin: 0;
+    padding: 20px;
     text-align: center;
-    padding: 16px;
-    margin: 0;
-    color: #1f2937;
+    color: #ffffff;
+
+    /* Animated gradient background */
+    background: linear-gradient(
+        270deg,
+        #0f2027,
+        #203a43,
+        #2c5364,
+        #1e3c72,
+        #2a5298
+    );
+    background-size: 1000% 1000%;
+    animation: gradientMove 20s ease infinite;
 }
 
-/* ===== Page title ===== */
+/* Background animation */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===============================
+   PAGE TITLE
+================================ */
 h1 {
-    font-size: 36px;
-    margin: 20px 0 30px;
-    color: #0f172a;
+    font-size: 38px;
+    margin: 20px 0 35px;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* ===== Cards ===== */
+/* ===============================
+   GLASS CARDS
+================================ */
 .card {
-    background: #ffffff;
-    padding: 28px 24px;
-    margin: 22px auto;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    padding: 30px 26px;
+    margin: 24px auto;
     width: 100%;
-    max-width: 680px;
-    border-radius: 18px;
+    max-width: 700px;
+
+    border-radius: 22px;
     box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.08),
-        0 2px 6px rgba(0, 0, 0, 0.05);
-    border-left: 6px solid #3b82f6;
+        0 20px 40px rgba(0, 0, 0, 0.25),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.25);
 }
 
-/* Different accent colors */
-.card:nth-of-type(2) {
-    border-left-color: #22c55e;
-}
-
-.card:nth-of-type(3) {
-    border-left-color: #f59e0b;
-}
-
-/* ===== Card headings ===== */
+/* ===============================
+   SECTION HEADINGS
+================================ */
 h2 {
-    font-size: 28px;
-    margin-bottom: 16px;
-    color: #111827;
+    font-size: 30px;
+    margin-bottom: 18px;
 }
 
-/* ===== Main text ===== */
+/* Different colours per section */
+.card:nth-of-type(1) h2 {
+    color: #ffd166; /* warm yellow */
+}
+
+.card:nth-of-type(2) h2 {
+    color: #4ade80; /* green */
+}
+
+.card:nth-of-type(3) h2 {
+    color: #60a5fa; /* blue */
+}
+
+/* ===============================
+   TEXT
+================================ */
 p {
-    font-size: 22px;
-    line-height: 1.75;
+    font-size: 24px;
+    line-height: 1.8;
     margin: 0;
 }
 
-/* ===== Mobile optimization ===== */
+/* ===============================
+   MOBILE OPTIMIZATION
+================================ */
 @media (max-width: 600px) {
     h1 {
-        font-size: 40px;
+        font-size: 42px;
     }
 
     h2 {
@@ -63,19 +99,24 @@ p {
     }
 
     p {
-        font-size: 27px;
+        font-size: 28px;
     }
 
     .card {
-        padding: 30px 22px;
-        border-radius: 20px;
+        padding: 34px 24px;
+        border-radius: 24px;
     }
 }
 
-/* ===== Optional subtle hover (desktop only) ===== */
+/* ===============================
+   SUBTLE FLOAT ANIMATION (DESKTOP)
+================================ */
 @media (hover: hover) {
+    .card {
+        transition: transform 0.3s ease;
+    }
+
     .card:hover {
-        transform: translateY(-2px);
-        transition: transform 0.2s ease;
+        transform: translateY(-4px);
     }
 }
