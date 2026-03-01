@@ -1,32 +1,25 @@
-/* ===============================
-   MOBILE-FIRST RESET
-================================ */
 * {
     box-sizing: border-box;
 }
 
 html, body {
-    width: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* VERY IMPORTANT */
+    width: 100%;
+    overflow-x: hidden;
 }
 
-/* ===============================
-   BODY & BACKGROUND
-================================ */
+/* Background */
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
     min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
 
     display: flex;
     flex-direction: column;
-    align-items: center;   /* HARD CENTER */
-    justify-content: flex-start;
+    align-items: center;
 
     text-align: center;
     color: #ffffff;
-
     padding: 16px;
 
     background: linear-gradient(
@@ -41,29 +34,23 @@ body {
     animation: gradientMove 18s ease infinite;
 }
 
-/* Animated background */
 @keyframes gradientMove {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* ===============================
-   TITLE
-================================ */
+/* Title */
 h1 {
     font-size: 40px;
     margin: 20px 0 30px;
-    max-width: 100%;
     text-shadow: 0 3px 6px rgba(0,0,0,0.4);
 }
 
-/* ===============================
-   GLASS CARDS (CENTERED)
-================================ */
+/* Cards */
 .card {
     width: 100%;
-    max-width: 420px;   /* MOBILE OPTIMAL WIDTH */
+    max-width: 420px;
     margin: 18px auto;
 
     background: rgba(255, 255, 255, 0.18);
@@ -78,31 +65,24 @@ h1 {
         inset 0 0 0 1px rgba(255,255,255,0.25);
 }
 
-/* ===============================
-   HEADINGS
-================================ */
+/* Headings */
 h2 {
     font-size: 30px;
     margin-bottom: 16px;
 }
 
-/* Accent colours */
 .card:nth-of-type(1) h2 { color: #ffd166; }
 .card:nth-of-type(2) h2 { color: #4ade80; }
 .card:nth-of-type(3) h2 { color: #60a5fa; }
 
-/* ===============================
-   TEXT
-================================ */
+/* Text */
 p {
     font-size: 26px;
     line-height: 1.8;
     margin: 0;
 }
 
-/* ===============================
-   EXTRA SMALL PHONES
-================================ */
+/* Small phones */
 @media (max-width: 360px) {
     h1 { font-size: 36px; }
     h2 { font-size: 28px; }
