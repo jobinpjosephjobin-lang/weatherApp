@@ -1,81 +1,110 @@
-/* ===== Base layout ===== */
+/* ===============================
+   MOBILE-FIRST RESET
+================================ */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* VERY IMPORTANT */
+}
+
+/* ===============================
+   BODY & BACKGROUND
+================================ */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(180deg, #e8f1f8, #f7f9fb);
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* HARD CENTER */
+    justify-content: flex-start;
+
     text-align: center;
+    color: #ffffff;
+
     padding: 16px;
-    margin: 0;
-    color: #1f2937;
+
+    background: linear-gradient(
+        270deg,
+        #0f2027,
+        #203a43,
+        #2c5364,
+        #1e3c72,
+        #2a5298
+    );
+    background-size: 800% 800%;
+    animation: gradientMove 18s ease infinite;
 }
 
-/* ===== Page title ===== */
+/* Animated background */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===============================
+   TITLE
+================================ */
 h1 {
-    font-size: 36px;
+    font-size: 40px;
     margin: 20px 0 30px;
-    color: #0f172a;
+    max-width: 100%;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.4);
 }
 
-/* ===== Cards ===== */
+/* ===============================
+   GLASS CARDS (CENTERED)
+================================ */
 .card {
-    background: #ffffff;
-    padding: 28px 24px;
-    margin: 22px auto;
     width: 100%;
-    max-width: 680px;
-    border-radius: 18px;
+    max-width: 420px;   /* MOBILE OPTIMAL WIDTH */
+    margin: 18px auto;
+
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    padding: 26px 22px;
+    border-radius: 22px;
+
     box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.08),
-        0 2px 6px rgba(0, 0, 0, 0.05);
-    border-left: 6px solid #3b82f6;
+        0 18px 35px rgba(0,0,0,0.28),
+        inset 0 0 0 1px rgba(255,255,255,0.25);
 }
 
-/* Different accent colors */
-.card:nth-of-type(2) {
-    border-left-color: #22c55e;
-}
-
-.card:nth-of-type(3) {
-    border-left-color: #f59e0b;
-}
-
-/* ===== Card headings ===== */
+/* ===============================
+   HEADINGS
+================================ */
 h2 {
-    font-size: 28px;
+    font-size: 30px;
     margin-bottom: 16px;
-    color: #111827;
 }
 
-/* ===== Main text ===== */
+/* Accent colours */
+.card:nth-of-type(1) h2 { color: #ffd166; }
+.card:nth-of-type(2) h2 { color: #4ade80; }
+.card:nth-of-type(3) h2 { color: #60a5fa; }
+
+/* ===============================
+   TEXT
+================================ */
 p {
-    font-size: 22px;
-    line-height: 1.75;
+    font-size: 26px;
+    line-height: 1.8;
     margin: 0;
 }
 
-/* ===== Mobile optimization ===== */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 40px;
-    }
-
-    h2 {
-        font-size: 32px;
-    }
-
-    p {
-        font-size: 27px;
-    }
-
-    .card {
-        padding: 30px 22px;
-        border-radius: 20px;
-    }
-}
-
-/* ===== Optional subtle hover (desktop only) ===== */
-@media (hover: hover) {
-    .card:hover {
-        transform: translateY(-2px);
-        transition: transform 0.2s ease;
-    }
+/* ===============================
+   EXTRA SMALL PHONES
+================================ */
+@media (max-width: 360px) {
+    h1 { font-size: 36px; }
+    h2 { font-size: 28px; }
+    p  { font-size: 24px; }
 }
