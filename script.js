@@ -1,75 +1,80 @@
 // ===============================
-// CONFIG
+// WEATHER CONFIG
 // ===============================
 const API_KEY = "6379c02462e04c51a05174111260103";
-const LOCATION = "686510"; // PIN is safest
+const LOCATION_QUERY = "686510,Kerala,India";
 
 // ===============================
 // FETCH WEATHER (3 DAYS)
 // ===============================
-async function loadWeather() {
-    try {
-        const response = await fetch(
-            `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${LOCATION}&days=3&aqi=no&alerts=no`
-        );
+fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${LOCATION_QUERY}&days=3&aqi=no&alerts=no`)
+    .then(response => response.json())
+    .then(data => {
 
-        const data = await response.json();
-
-        // If API sends error
-        if (data.error) {
-            throw new Error(data.error.message);
-        }
-
-        // -------- Location --------
         const locationText = "Chathanthara, Kerala, PIN 686510";
 
-        // -------- Today --------
-        const current = data.current;
-        const today = data.forecast.forecastday[0];
+        // ---------- ഇന്നത്തെ കാലാവസ്ഥ ----------
+        const temperature = data.current.temp_c;
+        const feelsLike = data.current.feelslike_c;
+        const humidity = data.current.humidity;
+        const condition = data.current.condition.text;
+
+        const rainChanceToday =
+            data.forecast.forecastday[0].day.daily_chance_of_rain;
 
         document.getElementById("weather").innerHTML = `
             📍 സ്ഥലം: ${locationText}<br><br>
-            🌡️ താപനില: ${current.temp_c}°C<br>
-            🤒 അനുഭവപ്പെടുന്നത്: ${current.feelslike_c}°C<br>
-            💧 ഈർപ്പം: ${current.humidity}%<br>
-            ☁️ കാലാവസ്ഥ: ${current.condition.text}
+            🌡️ താപനില: ${temperature}°C<br>
+            🤒 അനുഭവപ്പെടുന്നത്: ${feelsLike}°C<br>
+            💧 ഈർപ്പം: ${humidity}%<br>
+            ☁️ കാലാവസ്ഥ: ${condition}
         `;
 
-        // -------- Rain chance today --------
-        document.getElementById("rain").innerText =
-            `🌧️ ഇന്നത്തെ മഴ സാധ്യത: ${today.day.daily_chance_of_rain}%`;
+        // ---------- ഇന്നത്തെ മഴ സാധ്യത ----------
+        let rainText = `🌧️ മഴയ്ക്ക് സാധ്യത: ${rainChanceToday}%`;
 
-        // -------- Next 2 days (simple) --------
-        let forecastHTML = "";
+        if (rainChanceToday >= 60) {
+            rainText += " (മഴയ്ക്ക് കൂടുതലായ സാധ്യത)";
+        } else if (rainChanceToday >= 30) {
+            rainText += " (മിതമായ സാധ്യത)";
+        } else {
+            rainText += " (കുറഞ്ഞ സാധ്യത)";
+        }
+
+        document.getElementById("rain").innerText = rainText;
+
+        // ---------- അടുത്ത 2 ദിവസത്തെ ലളിത പ്രവചനം ----------
+        let forecastText = "";
 
         for (let i = 1; i <= 2; i++) {
             const day = data.forecast.forecastday[i];
-            const chance = day.day.daily_chance_of_rain;
+            const rainChance = day.day.daily_chance_of_rain;
 
-            const text =
-                chance >= 40
-                    ? "മഴയുള്ള ദിവസം 🌧️"
-                    : "സൂര്യപ്രകാശമുള്ള ദിവസം ☀️";
+            let result = "സൂര്യപ്രകാശമുള്ള ദിവസം ☀️";
+            if (rainChance >= 40) {
+                result = "മഴയുള്ള ദിവസം 🌧️";
+            }
 
-            forecastHTML += `➡️ ${i === 1 ? "നാളെ" : "മറ്റന്നാൾ"}: ${text}<br>`;
+            forecastText += `
+                📆 ${i === 1 ? "നാളെ" : "മറ്റന്നാൾ"}: ${result}<br>
+            `;
         }
 
-        document.getElementById("forecast").innerHTML = forecastHTML;
-
-    } catch (err) {
-        console.error("Weather fetch failed:", err);
-
+        document.getElementById("forecast").innerHTML = forecastText;
+    })
+    .catch(error => {
         document.getElementById("weather").innerText =
             "കാലാവസ്ഥ വിവരങ്ങൾ ലഭ്യമല്ല";
         document.getElementById("rain").innerText =
             "മഴ വിവരങ്ങൾ ലഭ്യമല്ല";
         document.getElementById("forecast").innerText =
             "പ്രവചന വിവരം ലഭ്യമല്ല";
-    }
-}
+        console.error(error);
+    });
 
-// Run once on load
-loadWeather();
-
-// Auto refresh every 30 minutes
-setInterval(loadWeather, 30 * 60 * 1000);
+// ===============================
+// AUTO REFRESH – 30 MINUTES
+// ===============================
+setInterval(() => {
+    location.reload();
+}, 30 * 60 * 1000);
