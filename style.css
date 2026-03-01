@@ -2,34 +2,36 @@ body {
     font-family: Arial, sans-serif;
     background: #f4f4f4;
     text-align: center;
-    padding: 20px;
+    padding: 15px;
 }
 
 h1 {
-    font-size: 36px;
-    margin-bottom: 30px;
+    font-size: 34px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    font-size: 26px;
 }
 
 .card {
     background: white;
     padding: 25px;
     margin: 20px auto;
-    width: 90%;
-    max-width: 600px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 650px;
+    border-radius: 14px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.12);
 }
 
-h2 {
-    font-size: 28px;
-}
-
-p, li {
+p {
     font-size: 22px;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+/* മൊബൈലിൽ എഴുത്ത് വലുതാക്കാൻ */
+@media (max-width: 600px) {
+    h1 { font-size: 38px; }
+    h2 { font-size: 30px; }
+    p  { font-size: 26px; }
 }
