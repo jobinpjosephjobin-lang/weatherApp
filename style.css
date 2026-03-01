@@ -1,37 +1,81 @@
+/* ===== Base layout ===== */
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(180deg, #e8f1f8, #f7f9fb);
     text-align: center;
-    padding: 15px;
+    padding: 16px;
+    margin: 0;
+    color: #1f2937;
 }
 
+/* ===== Page title ===== */
 h1 {
-    font-size: 34px;
-    margin-bottom: 25px;
+    font-size: 36px;
+    margin: 20px 0 30px;
+    color: #0f172a;
 }
 
-h2 {
-    font-size: 26px;
-}
-
+/* ===== Cards ===== */
 .card {
-    background: white;
-    padding: 25px;
-    margin: 20px auto;
+    background: #ffffff;
+    padding: 28px 24px;
+    margin: 22px auto;
     width: 100%;
-    max-width: 650px;
-    border-radius: 14px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.12);
+    max-width: 680px;
+    border-radius: 18px;
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08),
+        0 2px 6px rgba(0, 0, 0, 0.05);
+    border-left: 6px solid #3b82f6;
 }
 
+/* Different accent colors */
+.card:nth-of-type(2) {
+    border-left-color: #22c55e;
+}
+
+.card:nth-of-type(3) {
+    border-left-color: #f59e0b;
+}
+
+/* ===== Card headings ===== */
+h2 {
+    font-size: 28px;
+    margin-bottom: 16px;
+    color: #111827;
+}
+
+/* ===== Main text ===== */
 p {
     font-size: 22px;
-    line-height: 1.7;
+    line-height: 1.75;
+    margin: 0;
 }
 
-/* മൊബൈലിൽ എഴുത്ത് വലുതാക്കാൻ */
+/* ===== Mobile optimization ===== */
 @media (max-width: 600px) {
-    h1 { font-size: 38px; }
-    h2 { font-size: 30px; }
-    p  { font-size: 26px; }
+    h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    p {
+        font-size: 27px;
+    }
+
+    .card {
+        padding: 30px 22px;
+        border-radius: 20px;
+    }
+}
+
+/* ===== Optional subtle hover (desktop only) ===== */
+@media (hover: hover) {
+    .card:hover {
+        transform: translateY(-2px);
+        transition: transform 0.2s ease;
+    }
 }
